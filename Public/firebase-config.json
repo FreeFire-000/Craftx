@@ -1,0 +1,24 @@
+{
+  "primary": {
+    "databaseURL": "https://free-fire-craftaland-default-rtdb.firebaseio.com"
+  },
+  "secondary": {
+    "databaseURL": "https://earn-world-c6fca-800063-default-rtdb.firebaseio.com",
+    "apiKey": "AIzaSyAx1dokGsKM9QdWO61Be-pmDyvbDoAkiIk",
+    "authDomain": "earn-world-c6fca-800063.firebaseapp.com",
+    "projectId": "earn-world-c6fca-800063",
+    "storageBucket": "earn-world-c6fca-800063.appspot.com",
+    "messagingSenderId": "656863499063",
+    "appId": "1:656863499063:web:a0795fd4eb81284f8ec0b2",
+    "measurementId": "G-BWS50VZNS1"
+  },
+  "backup": {
+    "apiKey": "AIzaSyCM_cDQOr-8no1gKQ1J9X-G09EHDbssN1s",
+    "authDomain": "free-fire-ke.firebaseapp.com",
+    "databaseURL": "https://free-fire-ke-default-rtdb.firebaseio.com",
+    "projectId": "free-fire-ke",
+    "storageBucket": "free-fire-ke.firebasestorage.app",
+    "messagingSenderId": "955379414280",
+    "appId": "1:955379414280:web:de946c9a445482cdb968bd"
+  }
+}

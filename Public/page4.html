@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Craftland Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #1f1f1f;
+      border-radius: 12px;
+      width: 340px;
+      padding: 20px;
+      position: relative;
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .brand-name {
+      margin-bottom: 15px;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #444;
+      margin-bottom: 10px;
+    }
+
+    .name {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: stretch;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: #2c2c2c;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .btn .action {
+      background: #3b82f6;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <button class="close-btn" onclick="goBack()">×</button>
+    <div class="brand-name">
+      <img src="https://i.ibb.co/rRfMjtg7/1934bdfbdc11.png" width="170px">
+    </div>
+    <img src="https://i.ibb.co/nNRgp85y/e2a07050f167.png" class="profile-img" alt="Cyber Pritam">
+    <div class="name">SacSo</div>
+
+    <div class="btn-group">
+      <button class="btn" onclick="window.open('https://youtube.com/@iamsacso?si=DtMQjtNcHcQt2IGn')">
+        YouTube <span class="action">Subscribe</span>
+      </button>
+
+      <button class="btn" onclick="window.open('https://www.instagram.com/iamsacso')">
+        Instagram <span class="action">Follow</span>
+      </button>
+      <button class="btn" onclick="window.open('https://iamsacso.github.io/craftland/?fbclid=PAZXh0bgNhZW0CMTEAAadL_Jyy8ZY8H7Y5N9ZUckfI7tbJnbmm3cekkKujf4fsxtDPP-uY0X1WxfVhuQ_aem_Ph3Sl26EYOuosq9ZCAvZrw')">
+        Website <span class="action">Visit</span></span>
+      </button>
+       <button class="btn" onclick="window.open('https://t.me/sacsoff')">
+        Telegram <span class="action">Join</span>
+      </button>
+       <button class="btn" onclick="window.open('https://discord.com/invite/yCpcKwpRzX')">
+        Discord <span class="action">Join</span>
+      </button>
+      <button class="btn" onclick="window.open('https://whatsapp.com/channel/0029Va52VjJ7tkjB2gpk4F2D')">
+        Whatsapp <span class="action">Join</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>
