@@ -1,0 +1,4325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2KQ4X0E33T"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2KQ4X0E33T');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeFire-craftland-maps</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="https://i.ibb.co/FLzNz8sv/caa0c82aab54.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-color: #1e1e1e;
+            --text-color: #ffffff;
+            --primary-color: #4a6bff;
+            --secondary-color: #ff4a4a;
+            --input-bg: #2d2d2d;
+            --border-color: #333;
+            --assets-color: #4CAF50;
+            --success-color: #28A745;
+            --warning-color: #ffc107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .topbar {
+            background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hamburger {
+            width: 30px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            height: 3px;
+            background: white;
+            display: block;
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover span {
+            background: var(--primary-color);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: #222;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .brand-name {
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: #00fff7;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+        }
+        
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .profile-pic-side {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(74, 107, 255, 0.5);
+        }
+        
+        .profile-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .link-row img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50px;
+            object-fit: cover;
+        }
+
+        .link-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 16px;
+            padding: 12px;
+            background: linear-gradient(135deg, #333 0%, #2a2a2a 100%);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .link-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .link-row button {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .link-row button:hover {
+            background: #3a5bef;
+            transform: scale(1.05);
+        }
+        
+        .search-header {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: block;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header-profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .search-container {
+            background-color: var(--input-bg);
+            border-radius: 25px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .search-container:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.3);
+        }
+        
+        .search-container i {
+            color: #777;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .search-container input {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+            color: var(--text-color);
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            margin-bottom: 60px;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        
+        .bottom-nav-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        
+        .bottom-nav button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+        
+        .bottom-nav button i {
+            font-size: 22px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .bottom-nav button.active {
+            color: var(--primary-color);
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        
+        .bottom-nav button.active i {
+            transform: scale(1.2);
+        }
+        
+        .bottom-nav button.assets-active {
+            color: var(--assets-color);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: var(--card-color);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            color: var(--text-color);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 24px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .assets-modal-content h2 {
+            color: var(--assets-color);
+            border-bottom-color: var(--assets-color);
+        }
+        
+        .thumbnail-upload-label {
+            display: block;
+            border: 2px dashed var(--border-color);
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thumbnail-upload-label:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 107, 255, 0.1);
+        }
+        
+        .thumbnail-upload-label i {
+            font-size: 40px;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .assets-thumbnail-upload-label i {
+            color: var(--assets-color);
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #aaa;
+        }
+        
+        .input-group input, 
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus, 
+        .input-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.3);
+            outline: none;
+        }
+        
+        #buttonon {
+            height: 36px;
+            padding: 0 15px;
+            background: linear-gradient(135deg, #4a6bff 0%, #3a5bef 100%);
+            color: white;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(74, 107, 255, 0.3);
+        }
+        
+        #buttonon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+        
+        .input-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .code-input-container {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .code-input-container input {
+            flex: 1;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        .code-input-container .copy-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .code-input-container .copy-btn:hover {
+            background-color: #3a5bef;
+        }
+        
+        .assets-copy-btn {
+            background-color: var(--assets-color);
+        }
+        
+        .assets-copy-btn:hover {
+            background-color: #3e8e41;
+        }
+        
+        #submit-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(74, 107, 255, 0.3);
+        }
+        
+        #submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+        
+        #assets-submit-btn {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+            height: 50px;
+            width: 100%;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        #assets-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .loading {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            color: #777;
+        }
+        
+        .map-card {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .map-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border-color: var(--primary-color);
+        }
+        
+        .map-thumbnail {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .map-card:hover .map-thumbnail {
+            opacity: 0.9;
+        }
+        
+        .map-card h3 {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .map-code-display {
+            display: none;
+            flex-direction: column;
+            padding: 0 15px 15px;
+            gap: 8px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .map-code-display .code-text {
+            word-break: break-all;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .map-code-display .copy-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .map-code-display .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(74, 107, 255, 0.3);
+        }
+        
+        .assets-copy-btn {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+        }
+        
+        .youtube-link {
+            display: block;
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin: 0 15px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .youtube-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .youtube-link i {
+            margin-right: 5px;
+        }
+        
+        .uploader-info {
+            display: flex;
+            align-items: center;
+            padding: 0 15px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .uploader-info:hover {
+            opacity: 0.8;
+        }
+        
+        .profile-pic-container {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .map-detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 200;
+            overflow: auto;
+            padding: 20px;
+        }
+        
+        .map-detail-content {
+            background-color: var(--card-color);
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            color: var(--text-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+        
+        .map-detail-thumbnail {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+        }
+        
+        .map-detail-body {
+            padding: 25px;
+        }
+        
+        .map-detail-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .map-detail-date {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .map-detail-codes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+       
+        .map-detail-code-item {
+            background-color: var(--input-bg);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .map-detail-code-label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+        
+        .map-detail-code-value {
+            word-break: break-all;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        
+        .map-detail-code-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .chips {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;   /* sirf horizontal scroll */
+    overflow-y: hidden; /* vertical scroll band */
+    padding: 5px 12px;
+    margin-top: 0px;
+    flex-wrap: nowrap;  /* wrap hata diya, taki chips ek line me hi rahe */
+    -webkit-overflow-scrolling: touch; /* mobile smooth scroll */
+}
+
+.chip {
+    padding: 5px 16px;
+    border-radius: 20px;
+    border: 1px solid #3f3f3f;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+    white-space: nowrap; /* text ko line break hone se bachao */
+    user-select: none;
+    transition: background .15s, border-color .15s;
+    font-size: 14px;
+}
+
+.chip:hover {
+    background: #2b2b2b;
+    border-color: #555;
+}
+
+.chip.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+        
+        .map-detail-code-buttons button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .map-detail-code-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        .map-detail-copy-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+        }
+        
+        .assets-detail-copy-btn {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+        }
+        
+        .map-detail-share-btn {
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+        }
+        
+        .map-detail-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .close-detail {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-detail:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 25px;
+            background-color: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+        
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 24px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .login-input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .login-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #aaa;
+        }
+        
+        .login-input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .login-input-group input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.3);
+            outline: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(74, 107, 255, 0.3);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: var(--secondary-color);
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+        }
+        
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .profile-pic-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(74, 107, 255, 0.3);
+        }
+        
+        .profile-pic-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .edit-profile-pic {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .edit-profile-pic:hover {
+            transform: scale(1.1);
+        }
+        
+        .logout-btn {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #cc0000 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .share-profile-btn {
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .share-profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+        
+        .assets-toast {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        .toast i {
+            font-size: 20px;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: #777;
+            transition: all 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 50;
+            transition: all 0.3s;
+        }
+
+        .assets-floating-btn {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #cc0000 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .map-card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .confirm-delete {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 300;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .confirm-delete-content {
+            background-color: var(--card-color);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        .confirm-delete-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .confirm-delete-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .confirm-delete-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-delete-btn.yes {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #cc0000 100%);
+            color: white;
+        }
+
+        .confirm-delete-btn.no {
+            background: linear-gradient(135deg, var(--input-bg) 0%, #333 100%);
+            color: var(--text-color);
+        }
+
+        .confirm-delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-loader {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .submit-loader i {
+            font-size: 24px;
+            color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        .assets-submit-loader i {
+            color: var(--assets-color);
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 250;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .share-modal-content {
+            background-color: var(--card-color);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .share-modal-content h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .share-input-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .share-input-container input {
+            flex: 1;
+            padding: 12px 15px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px 0 0 8px;
+            color: var(--text-color);
+            border-right: none;
+            transition: all 0.3s ease;
+        }
+
+        .share-input-container input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.3);
+            outline: none;
+        }
+
+        .share-input-container button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .share-input-container button:hover {
+            background: #3a5bef;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 4px;
+        }
+
+        .share-buttons button {
+            flex: 1;
+            padding: 8px;
+            margin:  0px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-share {
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+        }
+
+        .facebook-share {
+            background: linear-gradient(135deg, #4267B2 0%, #3b5998 100%);
+        }
+
+        .telegram-share {
+            background: linear-gradient(135deg, #0088cc 0%, #0077b5 100%);
+        }
+        
+        .share-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .close-share {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-share:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .database-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .database-selector button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--input-bg) 0%, #333 100%);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .database-selector button.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+        }
+
+        .database-selector button.active.assets-active {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+        }
+        
+        .database-selector button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .profile-database-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--input-bg) 0%, #333 100%);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .left-pading {
+            display: block;
+            margin: auto;
+            padding-left: 10px;
+            padding-top: 20px;
+        }
+
+        .profile-database-btn.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+        }
+
+        .profile-database-btn.active.assets-active {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+        }
+        
+        .profile-database-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #profile-database-selector {
+            margin: 15px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .wwep {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* New styles for multiple code inputs */
+        .code-inputs-container {
+            margin-bottom: 15px;
+        }
+        
+        .code-input-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .tyu {
+            height: 100px;
+            font-size: 16px;
+            padding-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            text-align: center;
+        }
+        
+        .code-input-wrapper input {
+            flex: 1;
+            padding: 12px 17px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 18px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .code-input-wrapper input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.3);
+            outline: none;
+        }
+        
+        .code-input-wrapper .input-label {
+            min-width: 100px;
+            margin-right: 10px;
+            font-weight: bold;
+            color: #aaa;
+        }
+        
+        .code-input-wrapper .remove-btn {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, red 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            margin-left: 3px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .code-input-wrapper .remove-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .add-code-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .add-code-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+        }
+        
+        .assets-add-code-btn {
+            background: linear-gradient(135deg, var(--assets-color) 0%, #3e8e41 100%);
+        }
+        
+        .assets-add-code-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        /* New styles for login/register tabs */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #aaa;
+        }
+
+        .auth-tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .auth-content {
+            display: none;
+        }
+
+        .auth-content.active {
+            display: block;
+        }
+
+        /* New styles for expanded map view */
+        .map-detail-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+
+        .map-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--input-bg);
+            padding: 10px 15px;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+
+        .map-stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .map-stat-label {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .map-detail-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+
+        .map-tag {
+            background-color: var(--input-bg);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* View count on map cards */
+        .map-views {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .map-views i {
+            font-size: 10px;
+        }
+        
+        .phonepe {
+            width: 100vw;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        /* New styles for tick button */
+        .tick-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .tick-button.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .tick-button:hover {
+            background: #218838;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .input-with-tick {
+            position: relative;
+        }
+        
+        /* New styles for improved form inputs */
+        .form-input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.3);
+            outline: none;
+        }
+        
+        /* New styles for improved buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(74, 107, 255, 0.3);
+            width: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #218838 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
+            width: 100%;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        /* New styles for improved cards */
+        .card {
+            background-color: var(--card-color);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Password strength indicator */
+        .password-strength {
+            margin-top: 5px;
+            height: 5px;
+            border-radius: 5px;
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .strength-weak {
+            background-color: var(--secondary-color);
+        }
+
+        .strength-medium {
+            background-color: var(--warning-color);
+        }
+
+        .strength-strong {
+            background-color: var(--success-color);
+        }
+
+        .strength-text {
+            font-size: 12px;
+            margin-top: 3px;
+            color: #aaa;
+        }
+        
+        /* Search button styles */
+        .search-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #777;
+            font-size: 19px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        /* New styles for video section */
+        .video-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            flex-direction: column;
+        }
+        
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .video-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .close-video-btn {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #cc0000 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .close-video-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .video-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+        
+        .video-iframe {
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 450px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+        
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .pagination-btn {
+            background: linear-gradient(135deg, var(--input-bg) 0%, #333 100%);
+            color: var(--text-color);
+            border: none;
+            margin-bottom: 30px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pagination-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .pagination-btn.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+        }
+        
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination-btn.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .page-numbers {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .page-number {
+            background: linear-gradient(135deg, var(--input-bg) 0%, #333 100%);
+            color: var(--text-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .page-number:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .page-number.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3a5bef 100%);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .search-toggle {
+                display: block;
+            }
+            
+            .search-container {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                margin: 10px;
+                z-index: 100;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+            
+            .search-container.active {
+                display: flex;
+            }
+            
+            .video-iframe {
+                max-height: 300px;
+            }
+            
+            .pagination-container {
+                flex-direction: column;
+            }
+            
+            .page-numbers {
+                display: flex;
+                width: fit-content;
+                order: 1;
+                margin-bottom: 70px;
+            }
+            
+            .pagination-btn {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="search-header" id="search-header">
+        <div class="header-content">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <button id="buttonon" onclick="openLink('https://github.com/FreeFireoff-arg/Craftlandv1/raw/refs/heads/main/Craftland_1.0.apk')"><b>Download App</b></button>
+            <div class="header-profile">
+                <img src="https://i.ibb.co/rRfMjtg7/1934bdfbdc11.png" class="left-padding" width="120px"> 
+                <img src="https://i.ibb.co/FLzNz8sv/caa0c82aab54.jpg" class="header-profile-pic" alt="Profile">
+            </div>
+        </div>
+        
+        <div class="search-container" id="search-container">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search maps..." id="search-input">
+            <button class="search-toggle" id="search-close" style="display: none;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <button class="search-toggle" id="search-open">
+            <i class="fas fa-search"></i>
+        </button>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()">×</div>
+        <div class="brand-name">
+             <img src="https://i.ibb.co/rRfMjtg7/1934bdfbdc11.png" class="left-padding" width="170px"> 
+        </div>
+        <div class="profile-section">
+            <img src="https://i.ibb.co/TxSLMYdV/8d402dc5c8a8.png" class="profile-pic-side" alt="Profile">
+            <div class="link-row">
+                <div>CYBER PRITAM ></div>
+                <button onclick="window.location.href='page1.html'">Follow</button>
+            </div>
+             <div class="link-row">
+                <div>items code></div>
+                <button onclick="window.location.href='https://craftlandv1.vercel.app/'">Go</button>
+            </div>
+            <div class="link-row">
+                <img src="https://i.ibb.co/Dfn6k8br/d069dd8f71c4.png" alt="YouTube"> 
+                <div>RUSHKEY</div>
+                <button onclick="window.location.href='page3.html'">Follow</button>
+            </div>
+            <div class="link-row">
+                <img src="https://i.ibb.co/FLzNz8sv/caa0c82aab54.jpg" alt="Ravi"> 
+                <div>craftlandstudiopc</div>
+                <button onclick="window.location.href='page2.html'">Follow</button>
+            </div>
+            <div class="link-row">
+                <img src="https://i.ibb.co/Zz0SYsmp/IMG-20250625-110058-658.jpg" alt="YouTube"> 
+                <div>LAG FF</div>
+                <button onclick="window.location.href='page3.html'">Follow</button>
+            </div>
+            <div class="link-row">
+                <img src="https://i.ibb.co/nNRgp85y/e2a07050f167.png" alt="YouTube"> 
+                <div>SacSo</div>
+                <button onclick="window.location.href='page4.html'">Follow</button>
+            </div>
+        </div>
+    </div>
+    <div class="chips">
+        <div class="chip active" data-value="">All</div>
+        <div class="chip" data-value="Bermuda">Bermuda</div>
+        <div class="chip" data-value="clash Squad">Clash Squad</div>
+        <div class="chip" data-value="1v1">1v1</div>
+        <div class="chip" data-value="Solara">Solara</div>
+        <div class="chip" data-value="2v2">2v2</div>
+    </div>
+
+    <div class="phonepe">
+       <img src="https://i.ibb.co/rRfMjtg7/1934bdfbdc11.png" class="left-padding" width="120px"> 
+    </div>
+    
+    <main class="content-area" id="content-area">
+        <div class="loading">Loading maps...</div>
+    </main>
+    
+    <!-- Pagination Container -->
+    <div class="pagination-container" id="pagination-container" style="display: none;">
+        <div style="display: flex; gap: 10px; width: fit-content;">
+        <button class="pagination-btn" id="prev-btn">
+            <i class="fas fa-chevron-left"></i> Previous
+        </button>
+          <button class="pagination-btn" id="next-btn">
+            Next <i class="fas fa-chevron-right"></i>
+        </button>
+        </div>
+        <div class="page-numbers" id="page-numbers">
+            <!-- Page numbers will be inserted here -->
+            
+        </div>
+        
+    </div>
+    
+    <nav class="bottom-nav" id="bottom-nav">
+        <div class="bottom-nav-container">
+            <button id="home-btn"><i class="fas fa-home"></i> Home</button>
+            <button id="assets-btn"><i class="fas fa-coins"></i> Assets</button>
+            <button id="profile-btn"><i class="fas fa-user"></i> Profile</button>
+            <button id="video-btn"><i class="fas fa-video"></i> Videos</button>
+        </div>
+    </nav>
+
+    <div class="floating-btn" id="floating-upload-btn">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <div class="confirm-delete" id="confirm-delete">
+        <div class="confirm-delete-content">
+            <h3>Delete Map</h3>
+            <p>Are you sure you want to delete this map? This action cannot be undone.</p>
+            <div class="confirm-delete-buttons">
+                <button class="confirm-delete-btn yes" id="confirm-delete-yes">Yes, Delete</button>
+                <button class="confirm-delete-btn no" id="confirm-delete-no">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="share-modal" id="share-modal">
+        <div class="share-modal-content">
+            <span class="close-share">&times;</span>
+            <h3>Share Map</h3>
+            <div class="share-input-container">
+                <input type="text" id="share-link-input" readonly>
+                <button onclick="copyShareLink()"><i class="fas fa-copy"></i></button>
+            </div>
+            <div class="share-buttons">
+                <button class="whatsapp-share" onclick="shareViaWhatsApp()"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button class="facebook-share" onclick="shareViaFacebook()"><i class="fab fa-facebook"></i> Facebook</button>
+                <button class="telegram-share" onclick="shareViaTelegram()"><i class="fab fa-telegram"></i> Telegram</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Section -->
+    <div class="video-section" id="video-section">
+        <div class="video-header">
+            <div class="video-title">𝔽𝕣𝕖𝕖 𝔽𝕚𝕣𝕖 ℂ𝕣𝕒𝕗𝕥𝕝𝕒𝕟𝕕 𝕍𝕚𝕕𝕖𝕠𝕤</div>
+            <button class="close-video-btn" id="close-video-btn">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <div class="video-container">
+            
+            <iframe src="https://freefire-000.github.io/craftland/Video.html" width="100%" height="100%" style="border:0;" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Primary Database Upload Form -->
+    <div id="upload-form-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" style="float: right; cursor: pointer; font-size: 24px;">&times;</span>
+            <h2>Upload Map</h2>
+            <label for="thumbnail-upload" class="thumbnail-upload-label">
+                <i class="fas fa-image"></i> Tap to upload Thumbnail
+                <input type="file" id="thumbnail-upload" accept="image/*" style="display: none;">
+                <img id="thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width: 100%; height: auto;">
+            </label>
+            <div class="input-group">
+                <label for="map-title">Map Title:</label>
+                <input type="text" id="map-title" placeholder="Enter map title">
+            </div>
+            
+            <div class="code-inputs-container" id="code-inputs-container">
+                <!-- Code inputs will be added here dynamically -->
+            </div>
+            
+            <button class="add-code-btn" id="add-code-btn">
+                <i class="fas fa-plus"></i> Add Map Code
+            </button>
+            
+            <div class="input-group">
+                <label for="youtube-url">YouTube URL:</label>
+                <input type="url" id="youtube-url" placeholder="Enter YouTube URL (optional)">
+            </div>
+            <div class="input-group">
+                <label for="description">Description:</label>
+                <textarea id="description" placeholder="Enter map description"></textarea>
+            </div>
+            <button id="submit-btn">Submit</button>
+            <div id="submit-loader" class="submit-loader">
+                <i class="fas fa-spinner"></i> Uploading map...
+            </div>
+        </div>
+    </div>
+
+    <!-- Assets Database Upload Form -->
+    <div id="assets-upload-form-modal" class="modal">
+        <div class="modal-content assets-modal-content">
+            <span class="close-assets-modal" style="float: right; cursor: pointer; font-size: 24px;">&times;</span>
+            <h2>Assets Store</h2>
+            <label for="assets-thumbnail-upload" class="thumbnail-upload-label assets-thumbnail-upload-label">
+                <i class="fas fa-image"></i> Tap to upload Thumbnail
+                <input type="file" id="assets-thumbnail-upload" accept="image/*" style="display: none;">
+                <img id="assets-thumbnail-preview" src="#" alt="Thumbnail Preview" style="display: none; max-width: 100%; height: auto;">
+            </label>
+            <div class="input-group">
+                <label for="assets-map-title">ASSETS TITLE:</label>
+                <input type="text" id="assets-map-title" placeholder="Enter ASSETS title">
+            </div>
+            
+            <div class="code-inputs-container" id="assets-code-inputs-container">
+                <!-- Code inputs will be added here dynamically -->
+            </div>
+            
+            <button class="add-code-btn assets-add-code-btn" id="assets-add-code-btn">
+                <i class="fas fa-plus"></i> Add ASSETS CODE
+            </button>
+            
+            <div class="input-group">
+                <label for="assets-youtube-url">YouTube URL:</label>
+                <input type="url" id="assets-youtube-url" placeholder="Enter YouTube URL (optional)">
+            </div>
+            <div class="input-group">
+                <label for="assets-description">Description:</label>
+                <textarea id="assets-description" placeholder="Enter map description"></textarea>
+            </div>
+            <button id="assets-submit-btn" class="assets-submit-btn">Submit</button>
+            <div id="assets-submit-loader" class="submit-loader assets-submit-loader">
+                <i class="fas fa-spinner"></i> Uploading map...
+            </div>
+        </div>
+    </div>
+
+    <div id="map-detail-modal" class="map-detail-modal">
+        <span class="close-detail">&times;</span>
+        <div class="map-detail-content">
+            <img id="detail-thumbnail" class="map-detail-thumbnail" src="" alt="Map Thumbnail">
+            <div class="map-detail-body">
+                <h2 id="detail-title" class="map-detail-title"></h2>
+                <div class="map-detail-date" id="detail-date"></div>
+                
+                <div class="map-detail-stats">
+                    <div class="map-stat">
+                        <div class="map-stat-value" id="detail-views">0</div>
+                        <div class="map-stat-label">Views</div>
+                    </div>
+                </div>
+                
+                <div class="map-detail-tags" id="detail-tags">
+                    <!-- Tags will be added here -->
+                </div>
+                
+                <div class="map-detail-codes-container" id="detail-codes-container">
+                    <!-- Map codes will be inserted here -->
+                </div>
+                
+                <a id="detail-youtube" href="" class="youtube-link" target="_blank"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                <p id="detail-description" class="map-detail-description"></p>
+                
+                <div class="uploader-info" id="detail-uploader">
+                    <div class="profile-pic-container">
+                        <img src="" alt="Profile Picture" class="profile-pic">
+                    </div>
+                    <span class="uploader-name"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-login-modal" style="float: right; cursor: pointer; font-size: 24px;">&times;</span>
+            <h2>Login Required</h2>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="login-tab">Login</div>
+                <div class="auth-tab" id="register-tab">Create Account</div>
+            </div>
+            
+            <div class="auth-content active" id="login-content">
+                <div class="error-message" id="login-error"></div>
+                <div class="form-input-container">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-input" placeholder="Enter your username">
+                </div>
+                <div class="form-input-container">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter your password">
+                    <i class="fas fa-eye password-toggle" id="toggle-password"></i>
+                </div>
+                <button class="btn-primary" id="login-btn">Login</button>
+                <div class="wwep">Please save your username and password</div>
+            </div>
+            
+            <div class="auth-content" id="register-content">
+                <div class="error-message" id="register-error"></div>
+                <div class="form-input-container">
+                    <label for="reg-username">Username</label>
+                    <div class="input-with-tick">
+                        <input type="text" id="reg-username" class="form-input" placeholder="Choose a username">
+                        <button class="tick-button" id="username-tick" onclick="registerFromTick()">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-input-container">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" class="form-input" placeholder="Create a password (min 6 chars)">
+                    <i class="fas fa-eye password-toggle" id="toggle-reg-password"></i>
+                    <div class="password-strength">
+                        <div class="strength-meter" id="strength-meter"></div>
+                    </div>
+                    <div class="strength-text" id="strength-text"></div>
+                </div>
+                <button class="btn-success" id="register-btn">Create account</button>
+                <h6 class="tyu">Please 🥺 save your username and Password</h6>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message"></span>
+    </div>
+
+    <template id="map-card-template">
+        <div class="map-card">
+            <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            <img src="" alt="Map Thumbnail" class="map-thumbnail">
+            <div class="map-views">
+                <i class="fas fa-eye"></i>
+                <span class="views-count">0</span>
+            </div>
+            <h3 class="map-title"></h3>
+            <div class="map-code-display">
+                <span class="code-text">Map Code: <span class="map-code"></span></span>
+                <button class="copy-btn"><i class="fas fa-copy"></i> Copy Code</button>
+                <button class="share-btn"><i class="fas fa-share"></i> Share</button>
+            </div>
+            <div class="uploader-info">
+                <div class="profile-pic-container">
+                    <img src="" alt="Profile Picture" class="profile-pic">
+                </div>
+                <span class="uploader-name"></span>
+            </div>
+        </div>
+    </template>
+
+    <template id="profile-page-template">
+        <div>
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-pic-large">
+                        <img src="" alt="Profile Picture" class="profile-pic">
+                        <label for="profile-pic-upload" class="edit-profile-pic">
+                            <i class="fas fa-camera"></i>
+                            <input type="file" id="profile-pic-upload" accept="image/*" style="display: none;">
+                        </label>
+                    </div>
+                    <span class="profile-name" id="profile-username"></span>
+                </div>
+                <div>
+                    <button class="logout-btn" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    <button class="share-profile-btn" id="share-profile-btn"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+            
+            <div class="database-selector" id="profile-database-selector">
+                <button class="profile-database-btn" data-db="primary"><i class="fas fa-home"></i> Home Maps</button>
+                <button class="profile-database-btn" data-db="assets"><i class="fas fa-coins"></i> Asset Store</button>
+            </div>
+            
+            <h3 style="margin-bottom: 15px;">Your Craftland</h3>
+            <div id="uploaded-maps-container">
+                <!-- User's uploaded maps will be inserted here -->
+            </div>
+        </div>
+    </template>
+
+    <template id="code-input-template">
+        <div class="code-input-wrapper">
+            <input type="text" class="input-label" placeholder="Name..." onchange="updateInputLabel(this)">
+            <input type="text" class="map-code-input" placeholder="Enter map code">
+            <button class="remove-btn" onclick="removeCodeInput(this)"><i class="fas fa-times"></i></button>
+        </div>
+    </template>
+
+    <template id="map-code-item-template">
+        <div class="map-detail-code-item">
+            <div class="map-detail-code-label"></div>
+            <div class="map-detail-code-value"></div>
+            <div class="map-detail-code-buttons">
+                <button class="map-detail-copy-btn">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <button class="map-detail-share-btn">
+                    <i class="fas fa-share"></i> Share
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <template id="map-tag-template">
+        <div class="map-tag"></div>
+    </template>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+    <script>
+        // Firebase configurations will be loaded from firebase-config.json
+        let primaryFirebaseConfig = null;
+        let secondaryFirebaseConfig = null;
+        let backupFirebaseConfig = null;
+        
+        // Firebase apps
+        let primaryApp = null;
+        let secondaryApp = null;
+        let backupApp = null;
+        
+        // Firebase database references
+        let primaryDatabase = null;
+        let secondaryDatabase = null;
+        let backupDatabase = null;
+
+        // Load Firebase configurations from JSON file
+        async function loadFirebaseConfigs() {
+            try {
+                const response = await fetch('firebase-config.json');
+                const configs = await response.json();
+                
+                primaryFirebaseConfig = configs.primary;
+                secondaryFirebaseConfig = configs.secondary;
+                backupFirebaseConfig = configs.backup;
+                
+                // Initialize Firebase apps
+                primaryApp = firebase.initializeApp(primaryFirebaseConfig, "primary");
+                secondaryApp = firebase.initializeApp(secondaryFirebaseConfig, "secondary");
+                backupApp = firebase.initializeApp(backupFirebaseConfig, "backup");
+                
+                // Get database references
+                primaryDatabase = firebase.database(primaryApp);
+                secondaryDatabase = firebase.database(secondaryApp);
+                backupDatabase = firebase.database(backupApp);
+                
+                // Continue with app initialization
+                initApp();
+            } catch (error) {
+                console.error('Error loading Firebase configurations:', error);
+                contentArea.innerHTML = '<p>Error loading app configuration. Please try again later.</p>';
+            }
+        }
+
+        // ImgBB API keys (primary and backup)
+        const IMGBB_API_KEYS = [
+            'ac36a174ebd65fec02ea7f14ed716a20', // Primary key
+            '75c50f78e44ef8d7bf0d6d913c42c689'  // Backup key
+        ];
+        let currentImgBBKeyIndex = 0;
+
+        const DEFAULT_THUMBNAIL = 'https://i.ibb.co/jPTH7Wtk/9b6ab7b2c069.jpg';
+        const DEFAULT_PROFILE_PIC = 'https://i.ibb.co/BHRTxtVf/a8311337dc8e.jpg';
+        const BASE_URL = window.location.origin + window.location.pathname;
+        
+        // Video URL
+        const VIDEO_URL = "https://www.youtube.com/embed?listType=playlist&list=PLYfMf0W6p1c8j3Yz3q3G3b3e3e3e3e3e3e3";
+
+        // DOM elements
+        const searchHeader = document.getElementById('search-header');
+        const contentArea = document.getElementById('content-area');
+        const bottomNav = document.getElementById('bottom-nav');
+        const floatingUploadBtn = document.getElementById('floating-upload-btn');
+        const uploadFormModal = document.getElementById('upload-form-modal');
+        const assetsUploadFormModal = document.getElementById('assets-upload-form-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const closeAssetsModal = document.querySelector('.close-assets-modal');
+        const submitBtn = document.getElementById('submit-btn');
+        const assetsSubmitBtn = document.getElementById('assets-submit-btn');
+        const submitLoader = document.getElementById('submit-loader');
+        const assetsSubmitLoader = document.getElementById('assets-submit-loader');
+        const thumbnailUpload = document.getElementById('thumbnail-upload');
+        const assetsThumbnailUpload = document.getElementById('assets-thumbnail-upload');
+        const thumbnailPreview = document.getElementById('thumbnail-preview');
+        const assetsThumbnailPreview = document.getElementById('assets-thumbnail-preview');
+        const homeBtn = document.getElementById('home-btn');
+        const assetsBtn = document.getElementById('assets-btn');
+        const profileBtn = document.getElementById('profile-btn');
+        const videoBtn = document.getElementById('video-btn');
+        const mapCardTemplate = document.getElementById('map-card-template');
+        const profilePageTemplate = document.getElementById('profile-page-template');
+        const mapDetailModal = document.getElementById('map-detail-modal');
+        const closeDetail = document.querySelector('.close-detail');
+        const togglePassword = document.getElementById('toggle-password');
+        const toggleRegPassword = document.getElementById('toggle-reg-password');
+        const passwordInput = document.getElementById('password');
+        const regPasswordInput = document.getElementById('reg-password');
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const loginError = document.getElementById('login-error');
+        const registerError = document.getElementById('register-error');
+        const confirmDeleteModal = document.getElementById('confirm-delete');
+        const confirmDeleteYes = document.getElementById('confirm-delete-yes');
+        const confirmDeleteNo = document.getElementById('confirm-delete-no');
+        const loginModal = document.getElementById('login-modal');
+        const closeLoginModal = document.querySelector('.close-login-modal');
+        const shareModal = document.getElementById('share-modal');
+        const shareLinkInput = document.getElementById('share-link-input');
+        const closeShare = document.querySelector('.close-share');
+        const codeInputsContainer = document.getElementById('code-inputs-container');
+        const assetsCodeInputsContainer = document.getElementById('assets-code-inputs-container');
+        const addCodeBtn = document.getElementById('add-code-btn');
+        const assetsAddCodeBtn = document.getElementById('assets-add-code-btn');
+        const codeInputTemplate = document.getElementById('code-input-template');
+        const mapCodeItemTemplate = document.getElementById('map-code-item-template');
+        const mapTagTemplate = document.getElementById('map-tag-template');
+        const detailCodesContainer = document.getElementById('detail-codes-container');
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginContent = document.getElementById('login-content');
+        const registerContent = document.getElementById('register-content');
+        const usernameTick = document.getElementById('username-tick');
+        const regUsernameInput = document.getElementById('reg-username');
+        const strengthMeter = document.getElementById('strength-meter');
+        const strengthText = document.getElementById('strength-text');
+        const searchInput = document.getElementById('search-input');
+        const searchContainer = document.getElementById('search-container');
+        const searchOpen = document.getElementById('search-open');
+        const searchClose = document.getElementById('search-close');
+        const chips = document.querySelectorAll('.chip');
+        const videoSection = document.getElementById('video-section');
+        const videoIframe = document.getElementById('video-iframe');
+        const closeVideoBtn = document.getElementById('close-video-btn');
+        const paginationContainer = document.getElementById('pagination-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const pageNumbers = document.getElementById('page-numbers');
+
+        // Pagination variables
+        let currentPage = 1;
+        let mapsPerPage = 20;
+        let totalPages = 1;
+        let allMaps = []; // Store all maps for filtering and pagination
+
+        let currentUser = null;
+        let thumbnailFile = null;
+        let assetsThumbnailFile = null;
+        let mapToDelete = null;
+        let currentMapToShare = null;
+        let currentDatabase = 'primary'; // 'primary', 'assets', or 'backup'
+        let currentAppPage = 'home'; // 'home', 'assets', 'profile', or 'video'
+        let currentMapDetail = null;
+        let previousState = {
+            scrollPosition: 0,
+            searchTerm: '',
+            page: 'home'
+        };
+        let isDirectMapLink = false; // Flag to track if we came from a direct map link
+        let isDirectProfileLink = false; // Flag to track if we came from a direct profile link
+
+        // Format timestamp to readable date
+        function formatDate(timestamp) {
+            if (!timestamp) return 'Unknown date';
+            const date = new Date(timestamp);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        }
+
+        function changeColor() {
+            document.getElementById("buttonon").style.backgroundColor = "green";
+        }
+
+        // Hash password using SHA-256
+        async function hashPassword(password) {
+            // Using js-sha256 library for hashing
+            return sha256(password);
+        }
+
+        // Check password strength
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength++;
+            if (password.length >= 12) strength++;
+            
+            // Complexity checks
+            if (/[A-Z]/.test(password)) strength++; // Uppercase letters
+            if (/[a-z]/.test(password)) strength++; // Lowercase letters
+            if (/[0-9]/.test(password)) strength++; // Numbers
+            if (/[^A-Za-z0-9]/.test(password)) strength++; // Special characters
+            
+            // Determine strength level
+            if (strength <= 2) {
+                return { level: 'weak', message: 'Weak password - too easy to guess' };
+            } else if (strength <= 4) {
+                return { level: 'medium', message: 'Medium strength - could be stronger' };
+            } else {
+                return { level: 'strong', message: 'Strong password - good job!' };
+            }
+        }
+
+        // Update password strength meter
+        function updatePasswordStrength() {
+            const password = regPasswordInput.value;
+            const strength = checkPasswordStrength(password);
+            
+            // Update meter
+            if (password.length === 0) {
+                strengthMeter.style.width = '0%';
+                strengthMeter.className = 'strength-meter';
+                strengthText.textContent = '';
+            } else {
+                if (strength.level === 'weak') {
+                    strengthMeter.style.width = '33%';
+                    strengthMeter.className = 'strength-meter strength-weak';
+                } else if (strength.level === 'medium') {
+                    strengthMeter.style.width = '66%';
+                    strengthMeter.className = 'strength-meter strength-medium';
+                } else {
+                    strengthMeter.style.width = '100%';
+                    strengthMeter.className = 'strength-meter strength-strong';
+                }
+                
+                strengthText.textContent = strength.message;
+                strengthText.style.color = strength.level === 'weak' ? 'var(--secondary-color)' : 
+                                          strength.level === 'medium' ? 'var(--warning-color)' : 
+                                          'var(--success-color)';
+            }
+        }
+
+        // Initialize the app
+        function initApp() {
+            // Check URL for map ID or profile parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const mapId = urlParams.get('map');
+            const profileId = urlParams.get('profile');
+            
+            if (mapId) {
+                isDirectMapLink = true;
+                // If there's a map ID in the URL, show that map directly
+                const dbRef = currentDatabase === 'primary' ? primaryDatabase : 
+                             currentDatabase === 'assets' ? secondaryDatabase : backupDatabase;
+                dbRef.ref('maps/' + mapId).once('value')
+                    .then(snapshot => {
+                        const mapData = snapshot.val();
+                        if (mapData) {
+                            showMapDetail({ id: mapId, ...mapData });
+                        } else {
+                            loadHomepage();
+                        }
+                    })
+                    .catch(() => {
+                        loadHomepage();
+                    });
+            } else if (profileId) {
+                isDirectProfileLink = true;
+                viewUserProfile(profileId);
+            } else {
+                // Otherwise load the homepage normally
+                const loggedInUser = localStorage.getItem('currentUser');
+                if (loggedInUser) {
+                    currentUser = JSON.parse(loggedInUser);
+                }
+                
+                // Add first code input by default
+                addCodeInput(codeInputsContainer);
+                addCodeInput(assetsCodeInputsContainer);
+                
+                loadHomepage();
+            }
+        }
+
+        // Toggle sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Toggle search container on mobile
+        function toggleSearch() {
+            searchContainer.classList.toggle('active');
+            searchOpen.style.display = searchContainer.classList.contains('active') ? 'none' : 'block';
+            searchClose.style.display = searchContainer.classList.contains('active') ? 'block' : 'none';
+            
+            if (searchContainer.classList.contains('active')) {
+                searchInput.focus();
+            }
+        }
+
+        // Open external links
+        function openLink(url) {
+            window.open(url, '_blank');
+        }
+
+        // Show toast notification
+        function showToast(message, duration = 3000, isAssets = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            
+            if (isAssets) {
+                toast.classList.add('assets-toast');
+            } else {
+                toast.classList.remove('assets-toast');
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility(input, icon) {
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Shuffle array (for randomizing map display)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Upload image to ImgBB
+        async function uploadImageToImgBB(file) {
+            const formData = new FormData();
+            formData.append('image', file);
+            
+            try {
+                const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEYS[currentImgBBKeyIndex]}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    return data.data.url;
+                } else {
+                    throw new Error('Image upload failed');
+                }
+            } catch (error) {
+                console.error('Error uploading image with key', IMGBB_API_KEYS[currentImgBBKeyIndex], error);
+                
+                // Try the next API key if available
+                if (currentImgBBKeyIndex < IMGBB_API_KEYS.length - 1) {
+                    currentImgBBKeyIndex++;
+                    console.log('Trying backup ImgBB API key:', IMGBB_API_KEYS[currentImgBBKeyIndex]);
+                    return uploadImageToImgBB(file);
+                } else {
+                    throw error;
+                }
+            }
+        }
+
+        // Update floating button style based on current page
+        function updateFloatingButtonStyle() {
+            if (currentAppPage === 'assets') {
+                floatingUploadBtn.classList.add('assets-floating-btn');
+                floatingUploadBtn.classList.remove('primary-floating-btn');
+            } else {
+                floatingUploadBtn.classList.add('primary-floating-btn');
+                floatingUploadBtn.classList.remove('assets-floating-btn');
+            }
+        }
+
+        // Update navigation buttons active state
+        function updateNavButtons() {
+            // Remove active classes from all buttons
+            homeBtn.classList.remove('active');
+            assetsBtn.classList.remove('active');
+            profileBtn.classList.remove('active');
+            videoBtn.classList.remove('active');
+            
+            // Add active class to current page button
+            if (currentAppPage === 'home') {
+                homeBtn.classList.add('active');
+            } else if (currentAppPage === 'assets') {
+                assetsBtn.classList.add('active', 'assets-active');
+            } else if (currentAppPage === 'profile') {
+                profileBtn.classList.add('active');
+            } else if (currentAppPage === 'video') {
+                videoBtn.classList.add('active');
+            }
+        }
+
+        // Add a new code input field
+        function addCodeInput(container) {
+            const codeInput = codeInputTemplate.content.cloneNode(true);
+            container.appendChild(codeInput);
+            
+            // Limit to 4 inputs
+            const inputs = container.querySelectorAll('.code-input-wrapper');
+            if (inputs.length >= 4) {
+                if (container === codeInputsContainer) {
+                    addCodeBtn.style.display = 'none';
+                } else {
+                    assetsAddCodeBtn.style.display = 'none';
+                }
+            }
+        }
+
+        // Remove a code input field
+        function removeCodeInput(button) {
+            const wrapper = button.closest('.code-input-wrapper');
+            wrapper.remove();
+            
+            // Show add button if less than 4 inputs
+            const container = wrapper.parentElement;
+            const inputs = container.querySelectorAll('.code-input-wrapper');
+            if (inputs.length < 4) {
+                if (container === codeInputsContainer) {
+                    addCodeBtn.style.display = 'flex';
+                } else {
+                    assetsAddCodeBtn.style.display = 'flex';
+                }
+            }
+        }
+
+        // Update input label when changed
+        function updateInputLabel(input) {
+            // You can add validation or formatting here if needed
+        }
+
+        // User login function
+        async function login(username, password) {
+            try {
+                // Hash the password before checking
+                const hashedPassword = await hashPassword(password);
+                
+                primaryDatabase.ref('users').orderByChild('username').equalTo(username).once('value')
+                    .then(snapshot => {
+                        const users = snapshot.val();
+                        if (!users) {
+                            throw new Error('Username not found');
+                        }
+                        
+                        let userFound = null;
+                        for (const userId in users) {
+                            if (users[userId].password === hashedPassword) {
+                                userFound = {
+                                    uid: userId,
+                                    ...users[userId]
+                                };
+                                break;
+                            }
+                        }
+                        
+                        if (!userFound) {
+                            throw new Error('Incorrect password');
+                        }
+                        
+                        currentUser = userFound;
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        
+                        loginError.textContent = '';
+                        showToast('Login successful!');
+                        loginModal.style.display = 'none';
+                        
+                        if (currentAppPage === 'assets') {
+                            assetsUploadFormModal.style.display = 'flex';
+                        } else {
+                            uploadFormModal.style.display = 'flex';
+                        }
+                    })
+                    .catch(error => {
+                        loginError.textContent = error.message;
+                    });
+            } catch (error) {
+                loginError.textContent = 'Error during login: ' + error.message;
+            }
+        }
+
+        // User registration function
+        async function register(username, password) {
+            try {
+                // Check password strength
+                const strength = checkPasswordStrength(password);
+                if (strength.level === 'weak') {
+                    registerError.textContent = 'Password is too weak. Please use a stronger password with at least 8 characters, including uppercase, lowercase, numbers, and special characters.';
+                    return;
+                }
+                
+                // Hash the password before storing
+                const hashedPassword = await hashPassword(password);
+                
+                primaryDatabase.ref('usernames').once('value')
+                    .then(snapshot => {
+                        if (snapshot.hasChild(username)) {
+                            throw new Error('Username already exists');
+                        }
+                        
+                        const newUserRef = primaryDatabase.ref('users').push();
+                        const userId = newUserRef.key;
+                        
+                        return newUserRef.set({
+                            username: username,
+                            password: hashedPassword, // Store the hashed password
+                            profilePic: DEFAULT_PROFILE_PIC,
+                            createdAt: firebase.database.ServerValue.TIMESTAMP
+                        }).then(() => {
+                            return primaryDatabase.ref('usernames/' + username).set(true);
+                        }).then(() => {
+                            return {
+                                uid: userId,
+                                username: username,
+                                password: hashedPassword, // Store hashed password in local user object
+                                profilePic: DEFAULT_PROFILE_PIC
+                            };
+                        });
+                    })
+                    .then((userData) => {
+                        showToast('Registration successful!');
+                        currentUser = userData;
+                        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                        loginModal.style.display = 'none';
+                        
+                        if (currentAppPage === 'assets') {
+                            assetsUploadFormModal.style.display = 'flex';
+                        } else {
+                            uploadFormModal.style.display = 'flex';
+                        }
+                    })
+                    .catch(error => {
+                        registerError.textContent = error.message;
+                    });
+            } catch (error) {
+                registerError.textContent = 'Error during registration: ' + error.message;
+            }
+        }
+
+        // Register from tick button
+        function registerFromTick() {
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            
+            if (username.length < 3) {
+                registerError.textContent = 'Username must be at least 3 characters';
+                return;
+            }
+            
+            if (password.length < 6) {
+                registerError.textContent = 'Password must be at least 6 characters';
+                return;
+            }
+            
+            register(username, password);
+        }
+
+        // Check username availability
+        function checkUsernameAvailability(username) {
+            if (username.length < 3) {
+                usernameTick.classList.remove('active');
+                return;
+            }
+            
+            primaryDatabase.ref('usernames').once('value')
+                .then(snapshot => {
+                    if (snapshot.hasChild(username)) {
+                        registerError.textContent = 'Username already exists';
+                        usernameTick.classList.remove('active');
+                    } else {
+                        registerError.textContent = '';
+                        usernameTick.classList.add('active');
+                    }
+                });
+        }
+
+        // Load homepage with maps
+        function loadHomepage() {
+            currentAppPage = 'home';
+            updateNavButtons();
+            updateFloatingButtonStyle();
+            
+            contentArea.innerHTML = '<div class="loading">Loading maps...</div>';
+            
+            primaryDatabase.ref('maps').once('value')
+                .then(snapshot => {
+                    const maps = snapshot.val();
+                    contentArea.innerHTML = '';
+                    
+                    if (maps) {
+                        let mapsArray = Object.entries(maps).map(([id, map]) => ({ id, ...map }));
+                        allMaps = [...mapsArray]; // Store all maps for filtering and pagination
+                        mapsArray = shuffleArray(mapsArray);
+                        
+                        // Initialize pagination
+                        setupPagination(mapsArray);
+                        displayMaps(mapsArray);
+                    } else {
+                        // If primary database fails, try backup database
+                        backupDatabase.ref('maps').once('value')
+                            .then(snapshot => {
+                                const maps = snapshot.val();
+                                contentArea.innerHTML = '';
+                                
+                                if (maps) {
+                                    let mapsArray = Object.entries(maps).map(([id, map]) => ({ id, ...map }));
+                                    allMaps = [...mapsArray]; // Store all maps for filtering and pagination
+                                    mapsArray = shuffleArray(mapsArray);
+                                    
+                                    // Initialize pagination
+                                    setupPagination(mapsArray);
+                                    displayMaps(mapsArray);
+                                } else {
+                                    contentArea.innerHTML = '<p>No maps found. Be the first to upload one!</p>';
+                                }
+                            })
+                            .catch(error => {
+                                contentArea.innerHTML = `<p>Error loading maps: ${error.message}</p>`;
+                            });
+                    }
+                })
+                .catch(error => {
+                    // If primary database fails, try backup database
+                    backupDatabase.ref('maps').once('value')
+                        .then(snapshot => {
+                            const maps = snapshot.val();
+                            contentArea.innerHTML = '';
+                            
+                            if (maps) {
+                                let mapsArray = Object.entries(maps).map(([id, map]) => ({ id, ...map }));
+                                allMaps = [...mapsArray]; // Store all maps for filtering and pagination
+                                mapsArray = shuffleArray(mapsArray);
+                                
+                                // Initialize pagination
+                                setupPagination(mapsArray);
+                                displayMaps(mapsArray);
+                            } else {
+                                contentArea.innerHTML = '<p>No maps found. Be the first to upload one!</p>';
+                            }
+                        })
+                        .catch(error => {
+                            contentArea.innerHTML = `<p>Error loading maps: ${error.message}</p>`;
+                        });
+                });
+        }
+
+        // Setup pagination
+        function setupPagination(mapsArray) {
+            totalPages = Math.ceil(mapsArray.length / mapsPerPage);
+            currentPage = 1;
+            
+            // Show pagination if there are multiple pages
+            if (totalPages > 1) {
+                paginationContainer.style.display = 'flex';
+                updatePaginationButtons();
+                renderPageNumbers();
+            } else {
+                paginationContainer.style.display = 'none';
+            }
+        }
+
+        // Update pagination buttons state
+        function updatePaginationButtons() {
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            
+            if (prevBtn.disabled) {
+                prevBtn.classList.add('disabled');
+            } else {
+                prevBtn.classList.remove('disabled');
+            }
+            
+            if (nextBtn.disabled) {
+                nextBtn.classList.add('disabled');
+            } else {
+                nextBtn.classList.remove('disabled');
+            }
+        }
+
+        // Render page numbers
+        function renderPageNumbers() {
+            pageNumbers.innerHTML = '';
+            
+            // Always show first page
+            addPageNumber(1);
+            
+            // Show ellipsis if needed
+            if (currentPage > 3) {
+                const ellipsis = document.createElement('span');
+                ellipsis.textContent = '...';
+                ellipsis.style.padding = '0 5px';
+                pageNumbers.appendChild(ellipsis);
+            }
+            
+            // Show pages around current page
+            const startPage = Math.max(2, currentPage - 1);
+            const endPage = Math.min(totalPages - 1, currentPage + 1);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                addPageNumber(i);
+            }
+            
+            // Show ellipsis if needed
+            if (currentPage < totalPages - 2) {
+                const ellipsis = document.createElement('span');
+                ellipsis.textContent = '...';
+                ellipsis.style.padding = '0 5px';
+                pageNumbers.appendChild(ellipsis);
+            }
+            
+            // Always show last page if there is more than one page
+            if (totalPages > 1) {
+                addPageNumber(totalPages);
+            }
+        }
+
+        // Add a page number button
+        function addPageNumber(page) {
+            const pageNumber = document.createElement('button');
+            pageNumber.className = 'page-number';
+            pageNumber.textContent = page;
+            
+            if (page === currentPage) {
+                pageNumber.classList.add('active');
+            }
+            
+            pageNumber.addEventListener('click', () => {
+                goToPage(page);
+            });
+            
+            pageNumbers.appendChild(pageNumber);
+        }
+
+        // Go to specific page
+        function goToPage(page) {
+            if (page < 1 || page > totalPages) return;
+            
+            currentPage = page;
+            displayMaps(allMaps);
+            updatePaginationButtons();
+            renderPageNumbers();
+            
+            // Scroll to top of content area
+            contentArea.scrollTo(0, 0);
+        }
+
+        // Display maps in the content area with pagination
+        function displayMaps(mapsArray) {
+            contentArea.innerHTML = '';
+            
+            // Calculate start and end index for current page
+            const startIndex = (currentPage - 1) * mapsPerPage;
+            const endIndex = Math.min(startIndex + mapsPerPage, mapsArray.length);
+            
+            // Get maps for current page
+            const currentPageMaps = mapsArray.slice(startIndex, endIndex);
+            
+            currentPageMaps.forEach(mapData => {
+                const card = mapCardTemplate.content.cloneNode(true);
+                card.querySelector('.map-thumbnail').src = mapData.thumbnail || DEFAULT_THUMBNAIL;
+                card.querySelector('.map-title').textContent = mapData.title;
+                card.querySelector('.views-count').textContent = mapData.views || 0;
+                
+                // Show the first code in the card (but hidden by default)
+                const firstCode = mapData.codes && mapData.codes.length > 0 ? mapData.codes[0].code : 'Click Thumbnail';
+                card.querySelector('.map-code').textContent = firstCode;
+                
+                const deleteBtn = card.querySelector('.delete-btn');
+                if (currentUser && mapData.uploaderId === currentUser.uid) {
+                    deleteBtn.style.display = 'flex';
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        showDeleteConfirmation(mapData, 'primary');
+                    });
+                } else {
+                    deleteBtn.style.display = 'none';
+                }
+                
+                const copyButton = card.querySelector('.copy-btn');
+                copyButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const codeToCopy = card.querySelector('.map-code').textContent;
+                    navigator.clipboard.writeText(codeToCopy);
+                    showToast(`Map code "${codeToCopy}" copied!`);
+                });
+                
+                const shareButton = card.querySelector('.share-btn');
+                shareButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showShareModal(mapData);
+                });
+                
+                // Handle thumbnail click to toggle code display
+                const thumbnail = card.querySelector('.map-thumbnail');
+                thumbnail.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const codeDisplay = card.querySelector('.map-code-display');
+                    codeDisplay.style.display = codeDisplay.style.display === 'flex' ? 'none' : 'flex';
+                });
+                
+                // Handle card click to show map detail
+                const cardElement = card.querySelector('.map-card');
+                cardElement.addEventListener('click', () => {
+                    previousState = {
+                        scrollPosition: window.scrollY,
+                        searchTerm: document.getElementById('search-input').value,
+                        page: currentAppPage
+                    };
+                    showMapDetail(mapData);
+                });
+                
+                const uploaderInfo = card.querySelector('.uploader-info');
+                primaryDatabase.ref('users/' + mapData.uploaderId).once('value')
+                    .then(userSnapshot => {
+                        const user = userSnapshot.val();
+                        if (user) {
+                            uploaderInfo.querySelector('.uploader-name').textContent = user.username;
+                            uploaderInfo.querySelector('.profile-pic').src = user.profilePic || DEFAULT_PROFILE_PIC;
+                            
+                            uploaderInfo.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                viewUserProfile(mapData.uploaderId);
+                            });
+                        }
+                    });
+                
+                contentArea.appendChild(card);
+            });
+        }
+
+        // Load assets page
+        function loadAssetsPage() {
+            currentAppPage = 'assets';
+            updateNavButtons();
+            updateFloatingButtonStyle();
+            
+            contentArea.innerHTML = '<div class="loading">Loading assets maps...</div>';
+            
+            secondaryDatabase.ref('maps').once('value')
+                .then(snapshot => {
+                    const maps = snapshot.val();
+                    contentArea.innerHTML = '';
+                    
+                    if (maps) {
+                        let mapsArray = Object.entries(maps).map(([id, map]) => ({ id, ...map }));
+                        allMaps = [...mapsArray]; // Store all maps for filtering and pagination
+                        mapsArray = shuffleArray(mapsArray);
+                        
+                        // Initialize pagination
+                        setupPagination(mapsArray);
+                        
+                        // Calculate start and end index for current page
+                        const startIndex = (currentPage - 1) * mapsPerPage;
+                        const endIndex = Math.min(startIndex + mapsPerPage, mapsArray.length);
+                        
+                        // Get maps for current page
+                        const currentPageMaps = mapsArray.slice(startIndex, endIndex);
+                        
+                        currentPageMaps.forEach(mapData => {
+                            const card = mapCardTemplate.content.cloneNode(true);
+                            card.querySelector('.map-thumbnail').src = mapData.thumbnail || DEFAULT_THUMBNAIL;
+                            card.querySelector('.map-title').textContent = mapData.title;
+                            card.querySelector('.views-count').textContent = mapData.views || 0;
+                            
+                            // Show the first code in the card (but hidden by default)
+                            const firstCode = mapData.codes && mapData.codes.length > 0 ? mapData.codes[0].code : 'Click Thumbnail';
+                            card.querySelector('.map-code').textContent = firstCode;
+                            
+                            // Change copy button style for assets
+                            const copyButton = card.querySelector('.copy-btn');
+                            copyButton.classList.add('assets-copy-btn');
+                            
+                            const deleteBtn = card.querySelector('.delete-btn');
+                            if (currentUser && mapData.uploaderId === currentUser.uid) {
+                                deleteBtn.style.display = 'flex';
+                                deleteBtn.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    showDeleteConfirmation(mapData, 'assets');
+                                });
+                            } else {
+                                deleteBtn.style.display = 'none';
+                            }
+                            
+                            copyButton.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                const codeToCopy = card.querySelector('.map-code').textContent;
+                                navigator.clipboard.writeText(codeToCopy);
+                                showToast(`Map code "${codeToCopy}" copied!`, 3000, true);
+                            });
+                            
+                            const shareButton = card.querySelector('.share-btn');
+                            shareButton.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                showShareModal(mapData);
+                            });
+                            
+                            // Handle thumbnail click to toggle code display
+                            const thumbnail = card.querySelector('.map-thumbnail');
+                            thumbnail.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                const codeDisplay = card.querySelector('.map-code-display');
+                                codeDisplay.style.display = codeDisplay.style.display === 'flex' ? 'none' : 'flex';
+                            });
+                            
+                            // Handle card click to show map detail
+                            const cardElement = card.querySelector('.map-card');
+                            cardElement.addEventListener('click', () => {
+                                previousState = {
+                                    scrollPosition: window.scrollY,
+                                    searchTerm: document.getElementById('search-input').value,
+                                    page: currentAppPage
+                                };
+                                showMapDetail(mapData);
+                            });
+                            
+                            const uploaderInfo = card.querySelector('.uploader-info');
+                            primaryDatabase.ref('users/' + mapData.uploaderId).once('value')
+                                .then(userSnapshot => {
+                                    const user = userSnapshot.val();
+                                    if (user) {
+                                        uploaderInfo.querySelector('.uploader-name').textContent = user.username;
+                                        uploaderInfo.querySelector('.profile-pic').src = user.profilePic || DEFAULT_PROFILE_PIC;
+                                        
+                                        uploaderInfo.addEventListener('click', (e) => {
+                                            e.stopPropagation();
+                                            viewUserProfile(mapData.uploaderId);
+                                        });
+                                    }
+                                });
+                            
+                            contentArea.appendChild(card);
+                        });
+                    } else {
+                        contentArea.innerHTML = '<p>No assets maps found. Be the first to upload one!</p>';
+                    }
+                })
+                .catch(error => {
+                    contentArea.innerHTML = `<p>Error loading assets maps: ${error.message}</p>`;
+                });
+        }
+
+        // Show delete confirmation dialog
+        function showDeleteConfirmation(mapData, dbType) {
+            mapToDelete = mapData;
+            currentDatabase = dbType;
+            confirmDeleteModal.style.display = 'flex';
+        }
+
+        // Delete map function
+        function deleteMap() {
+            if (!mapToDelete || !currentUser) return;
+            
+            const dbRef = currentDatabase === 'primary' ? primaryDatabase : 
+                         currentDatabase === 'assets' ? secondaryDatabase : backupDatabase;
+            
+            dbRef.ref('maps/' + mapToDelete.id).remove()
+                .then(() => {
+                    showToast('Map deleted successfully!', 3000, currentDatabase === 'assets');
+                    confirmDeleteModal.style.display = 'none';
+                    
+                    if (currentAppPage === 'assets') {
+                        loadAssetsPage();
+                    } else {
+                        loadHomepage();
+                    }
+                })
+                .catch(error => {
+                    showToast('Error deleting map: ' + error.message, 3000, currentDatabase === 'assets');
+                });
+        }
+
+        // Show map detail view
+        function showMapDetail(mapData) {
+            currentMapDetail = mapData;
+            
+            document.getElementById('detail-title').textContent = mapData.title;
+            document.getElementById('detail-thumbnail').src = mapData.thumbnail || DEFAULT_THUMBNAIL;
+            
+            // Update date display
+            document.getElementById('detail-date').textContent = `Uploaded: ${mapData.formattedDate || formatDate(mapData.createdAt)}`;
+            
+            // Update stats (views)
+            document.getElementById('detail-views').textContent = mapData.views || 0;
+            
+            // Update tags
+            const tagsContainer = document.getElementById('detail-tags');
+            tagsContainer.innerHTML = '';
+            
+            if (mapData.tags && mapData.tags.length > 0) {
+                mapData.tags.forEach(tag => {
+                    const tagElement = mapTagTemplate.content.cloneNode(true);
+                    tagElement.querySelector('.map-tag').textContent = tag;
+                    tagsContainer.appendChild(tagElement);
+                });
+            } else {
+                // Add default tags if none exist
+                const defaultTags = ['Free Fire', 'Map', 'Craftland'];
+                defaultTags.forEach(tag => {
+                    const tagElement = mapTagTemplate.content.cloneNode(true);
+                    tagElement.querySelector('.map-tag').textContent = tag;
+                    tagsContainer.appendChild(tagElement);
+                });
+            }
+            
+            // Clear previous codes
+            detailCodesContainer.innerHTML = '';
+            
+            // Add all map codes with copy buttons
+            if (mapData.codes && mapData.codes.length > 0) {
+                mapData.codes.forEach(codeItem => {
+                    const codeItemElement = mapCodeItemTemplate.content.cloneNode(true);
+                    codeItemElement.querySelector('.map-detail-code-label').textContent = codeItem.label || 'Map Code';
+                    codeItemElement.querySelector('.map-detail-code-value').textContent = codeItem.code;
+                    
+                    const copyButton = codeItemElement.querySelector('.map-detail-copy-btn');
+                    const shareButton = codeItemElement.querySelector('.map-detail-share-btn');
+                    
+                    // Style differently for assets
+                    if (currentAppPage === 'assets') {
+                        copyButton.classList.add('assets-detail-copy-btn');
+                    }
+                    
+                    copyButton.addEventListener('click', () => {
+                        navigator.clipboard.writeText(codeItem.code);
+                        showToast(`Map code "${codeItem.code}" copied!`, 3000, currentAppPage === 'assets');
+                    });
+                    
+                    shareButton.addEventListener('click', () => {
+                        showShareModal({
+                            ...mapData,
+                            code: codeItem.code
+                        });
+                    });
+                    
+                    detailCodesContainer.appendChild(codeItemElement);
+                });
+            } else {
+                // Fallback for old maps with single code
+                const codeItemElement = mapCodeItemTemplate.content.cloneNode(true);
+                codeItemElement.querySelector('.map-detail-code-label').textContent = 'Map Code';
+                codeItemElement.querySelector('.map-detail-code-value').textContent = mapData.code || 'No code available';
+                
+                const copyButton = codeItemElement.querySelector('.map-detail-copy-btn');
+                const shareButton = codeItemElement.querySelector('.map-detail-share-btn');
+                
+                // Style differently for assets
+                if (currentAppPage === 'assets') {
+                    copyButton.classList.add('assets-detail-copy-btn');
+                }
+                
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(mapData.code);
+                    showToast(`Map code "${mapData.code}" copied!`, 3000, currentAppPage === 'assets');
+                });
+                
+                shareButton.addEventListener('click', () => {
+                    showShareModal(mapData);
+                });
+                
+                detailCodesContainer.appendChild(codeItemElement);
+            }
+            
+            if (mapData.youtubeUrl) {
+                document.getElementById('detail-youtube').href = mapData.youtubeUrl;
+                document.getElementById('detail-youtube').style.display = 'block';
+            } else {
+                document.getElementById('detail-youtube').style.display = 'none';
+            }
+            
+            document.getElementById('detail-description').textContent = mapData.description || 'No description provided.';
+            
+            const uploaderInfo = document.getElementById('detail-uploader');
+            primaryDatabase.ref('users/' + mapData.uploaderId).once('value')
+                .then(userSnapshot => {
+                    const user = userSnapshot.val();
+                    if (user) {
+                        uploaderInfo.querySelector('.uploader-name').textContent = user.username;
+                        uploaderInfo.querySelector('.profile-pic').src = user.profilePic || DEFAULT_PROFILE_PIC;
+                        
+                        uploaderInfo.addEventListener('click', () => {
+                            viewUserProfile(mapData.uploaderId);
+                        });
+                    }
+                });
+            
+            mapDetailModal.style.display = 'block';
+            
+            // Increment view count
+            const dbRef = currentDatabase === 'primary' ? primaryDatabase : 
+                         currentDatabase === 'assets' ? secondaryDatabase : backupDatabase;
+            
+            dbRef.ref('maps/' + mapData.id).transaction(map => {
+                if (map) {
+                    map.views = (map.views || 0) + 1;
+                }
+                return map;
+            }).then(() => {
+                // Update the view count on the home page card if it exists
+                const mapCard = document.querySelector(`.map-card[data-id="${mapData.id}"]`);
+                if (mapCard) {
+                    const viewsCount = mapCard.querySelector('.views-count');
+                    if (viewsCount) {
+                        viewsCount.textContent = (parseInt(viewsCount.textContent) || 0) + 1;
+                    }
+                }
+            });
+            
+            // Update URL without reloading if not a direct map link
+            if (!isDirectMapLink) {
+                const newUrl = `${BASE_URL}?map=${mapData.id}`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }
+        }
+
+        // Show share modal
+        function showShareModal(mapData) {
+            currentMapToShare = mapData;
+            // Use current website URL instead of hardcoded URL
+            const shareLink = `${BASE_URL}?map=${mapData.id}`;
+            shareLinkInput.value = shareLink;
+            shareModal.style.display = 'flex';
+        }
+
+        // Show profile share modal
+        function showProfileShareModal(userId, username) {
+            currentMapToShare = { id: userId, title: username + "'s Profile" };
+            // Use current website URL instead of hardcoded URL
+            const shareLink = `${BASE_URL}?profile=${userId}`;
+            shareLinkInput.value = shareLink;
+            shareModal.style.display = 'flex';
+        }
+
+        // Copy share link to clipboard
+        function copyShareLink() {
+            shareLinkInput.select();
+            document.execCommand('copy');
+            showToast('Link copied to clipboard!', 3000, currentAppPage === 'assets');
+        }
+
+        // Share via WhatsApp
+        function shareViaWhatsApp() {
+            const message = currentMapToShare.title.includes("Profile") 
+                ? `Check out this Free Fire profile: ${shareLinkInput.value}`
+                : `Check out this Free Fire map: ${shareLinkInput.value}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Share via Facebook
+        function shareViaFacebook() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareLinkInput.value)}`, '_blank');
+        }
+
+        // Share via Telegram
+        function shareViaTelegram() {
+            const message = currentMapToShare.title.includes("Profile") 
+                ? `Check out this Free Fire profile: ${shareLinkInput.value}`
+                : `Check out this Free Fire map: ${shareLinkInput.value}`;
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // View user profile
+        function viewUserProfile(userId) {
+            contentArea.innerHTML = '<div class="loading">Loading profile...</div>';
+            
+            // Save previous state if not coming from a direct link
+            if (!isDirectProfileLink) {
+                previousState = {
+                    scrollPosition: window.scrollY,
+                    searchTerm: document.getElementById('search-input').value,
+                    page: currentAppPage
+                };
+            }
+            
+            // Update URL if not a direct profile link
+            if (!isDirectProfileLink) {
+                const newUrl = `${BASE_URL}?profile=${userId}`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }
+            
+            primaryDatabase.ref('users/' + userId).once('value')
+                .then(userSnapshot => {
+                    const userData = userSnapshot.val();
+                    
+                    const profilePage = profilePageTemplate.content.cloneNode(true);
+                    
+                    profilePage.getElementById('profile-username').textContent = userData.username;
+                    profilePage.querySelector('.profile-pic').src = userData.profilePic || DEFAULT_PROFILE_PIC;
+                    
+                    // Only show edit profile pic button if viewing own profile
+                    const editProfilePic = profilePage.querySelector('.edit-profile-pic');
+                    if (currentUser && userId === currentUser.uid) {
+                        editProfilePic.style.display = 'flex';
+                        
+                        const profilePicUpload = profilePage.getElementById('profile-pic-upload');
+                        const profilePic = profilePage.querySelector('.profile-pic');
+                        
+                        profilePicUpload.addEventListener('change', async (event) => {
+                            const file = event.target.files[0];
+                            if (file) {
+                                try {
+                                    showToast('Uploading profile picture...');
+                                    const imageUrl = await uploadImageToImgBB(file);
+                                    
+                                    await primaryDatabase.ref('users/' + userId).update({
+                                        profilePic: imageUrl
+                                    });
+                                    
+                                    currentUser.profilePic = imageUrl;
+                                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                                    
+                                    profilePic.src = imageUrl;
+                                    showToast('Profile picture updated!');
+                                } catch (error) {
+                                    showToast('Error updating profile picture: ' + error.message);
+                                }
+                            }
+                        });
+                    } else {
+                        editProfilePic.style.display = 'none';
+                    }
+                    
+                    const logoutBtn = profilePage.getElementById('logout-btn');
+                    const shareProfileBtn = profilePage.getElementById('share-profile-btn');
+                    
+                    // Modified this part to fix the issue
+                    if (!currentUser || userId !== currentUser.uid) {
+                        logoutBtn.innerHTML = '<i class="fas fa-arrow-left"></i> Back';
+                        logoutBtn.style.backgroundColor = '#4a6bff';
+                        logoutBtn.addEventListener('click', () => {
+                            if (currentAppPage === 'assets') {
+                                loadAssetsPage();
+                            } else {
+                                loadHomepage();
+                            }
+                        });
+                    } else {
+                        logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+                        logoutBtn.style.backgroundColor = 'var(--secondary-color)';
+                        logoutBtn.addEventListener('click', () => {
+                            currentUser = null;
+                            localStorage.removeItem('currentUser');
+                            loadHomepage();
+                        });
+                    }
+                    
+                    // Always show share button for all profiles
+                    shareProfileBtn.style.display = 'flex';
+                    shareProfileBtn.addEventListener('click', () => {
+                        showProfileShareModal(userId, userData.username);
+                    });
+                    
+                    const uploadedMapsContainer = profilePage.getElementById('uploaded-maps-container');
+                    const databaseSelector = profilePage.getElementById('profile-database-selector');
+                    const dbButtons = databaseSelector.querySelectorAll('.profile-database-btn');
+                    
+                    // Function to load maps for the profile
+                    function loadProfileMaps(dbType) {
+                        uploadedMapsContainer.innerHTML = '<div class="loading">Loading maps...</div>';
+                        
+                        // Update active button
+                        dbButtons.forEach(btn => {
+                            if (btn.dataset.db === dbType) {
+                                btn.classList.add('active');
+                                if (dbType === 'assets') {
+                                    btn.classList.add('assets-active');
+                                }
+                            } else {
+                                btn.classList.remove('active', 'assets-active');
+                            }
+                        });
+                        
+                        const dbRef = dbType === 'primary' ? primaryDatabase : 
+                                     dbType === 'assets' ? secondaryDatabase : backupDatabase;
+                        
+                        dbRef.ref('maps').orderByChild('uploaderId').equalTo(userId).once('value')
+                            .then(snapshot => {
+                                const maps = snapshot.val();
+                                uploadedMapsContainer.innerHTML = '';
+                                
+                                if (maps) {
+                                    let mapsArray = Object.entries(maps).map(([id, map]) => ({ id, ...map, dbType }));
+                                    
+                                    // Sort by timestamp if available
+                                    mapsArray.sort((a, b) => {
+                                        const timeA = a.createdAt || 0;
+                                        const timeB = b.createdAt || 0;
+                                        return timeB - timeA;
+                                    });
+                                    
+                                    mapsArray.forEach(mapData => {
+                                        const card = mapCardTemplate.content.cloneNode(true);
+                                        card.querySelector('.map-thumbnail').src = mapData.thumbnail || DEFAULT_THUMBNAIL;
+                                        card.querySelector('.map-title').textContent = mapData.title;
+                                        card.querySelector('.views-count').textContent = mapData.views || 0;
+                                        
+                                        // Show the first code in the card (but hidden by default)
+                                        const firstCode = mapData.codes && mapData.codes.length > 0 ? mapData.codes[0].code : 'Click Thumbnail';
+                                        card.querySelector('.map-code').textContent = firstCode;
+                                        
+                                        // Style differently for assets
+                                        if (mapData.dbType === 'assets') {
+                                            const copyButton = card.querySelector('.copy-btn');
+                                            copyButton.classList.add('assets-copy-btn');
+                                        }
+                                        
+                                        const deleteBtn = card.querySelector('.delete-btn');
+                                        if (currentUser && mapData.uploaderId === currentUser.uid) {
+                                            deleteBtn.style.display = 'flex';
+                                            deleteBtn.addEventListener('click', (e) => {
+                                                e.stopPropagation();
+                                                showDeleteConfirmation(mapData, mapData.dbType);
+                                            });
+                                        } else {
+                                            deleteBtn.style.display = 'none';
+                                        }
+                                        
+                                        const copyButton = card.querySelector('.copy-btn');
+                                        copyButton.addEventListener('click', (e) => {
+                                            e.stopPropagation();
+                                            const codeToCopy = card.querySelector('.map-code').textContent;
+                                            navigator.clipboard.writeText(codeToCopy);
+                                            showToast(`Map code "${codeToCopy}" copied!`, 3000, mapData.dbType === 'assets');
+                                        });
+
+                                        const shareButton = card.querySelector('.share-btn');
+                                        shareButton.addEventListener('click', (e) => {
+                                            e.stopPropagation();
+                                            showShareModal(mapData);
+                                        });
+                                        
+                                        // Handle thumbnail click to toggle code display
+                                        const thumbnail = card.querySelector('.map-thumbnail');
+                                        thumbnail.addEventListener('click', (e) => {
+                                            e.preventDefault();
+                                            const codeDisplay = card.querySelector('.map-code-display');
+                                            codeDisplay.style.display = codeDisplay.style.display === 'flex' ? 'none' : 'flex';
+                                        });
+                                        
+                                        // Handle card click to show map detail
+                                        const cardElement = card.querySelector('.map-card');
+                                        cardElement.addEventListener('click', () => {
+                                            previousState = {
+                                                scrollPosition: window.scrollY,
+                                                searchTerm: document.getElementById('search-input').value,
+                                                page: currentAppPage
+                                            };
+                                            showMapDetail(mapData);
+                                        });
+                                        
+                                        card.querySelector('.uploader-info').style.display = 'none';
+                                        
+                                        uploadedMapsContainer.appendChild(card);
+                                    });
+                                } else {
+                                    uploadedMapsContainer.innerHTML = '<p>No maps uploaded yet.</p>';
+                                }
+                            });
+                    }
+                    
+                    // Add click handlers for database buttons
+                    dbButtons.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            loadProfileMaps(btn.dataset.db);
+                        });
+                    });
+                    
+                    // Load primary maps by default
+                    loadProfileMaps('primary');
+                    
+                    contentArea.innerHTML = '';
+                    contentArea.appendChild(profilePage);
+                });
+        }
+
+        // Load profile page
+        function loadProfilePage() {
+            currentAppPage = 'profile';
+            updateNavButtons();
+            
+            if (currentUser) {
+                viewUserProfile(currentUser.uid);
+            } else {
+                // Show login modal only if not coming from a direct profile link
+                if (!isDirectProfileLink) {
+                    showToast('Please login to view your profile');
+                    loginModal.style.display = 'flex';
+                } else {
+                    // If coming from direct link but not logged in, just show the profile
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const profileId = urlParams.get('profile');
+                    if (profileId) {
+                        viewUserProfile(profileId);
+                    }
+                }
+            }
+        }
+
+        // Load video page
+        function loadVideoPage() {
+            currentAppPage = 'video';
+            updateNavButtons();
+            
+            // Hide all content and show video section
+            contentArea.style.display = 'none';
+            searchHeader.style.display = 'none';
+            bottomNav.style.display = 'none';
+            floatingUploadBtn.style.display = 'none';
+            videoSection.style.display = 'flex';
+            
+            // Load the video URL in the iframe
+            videoIframe.src = VIDEO_URL;
+        }
+
+        // Close video page and return to previous content
+        function closeVideoPage() {
+            videoSection.style.display = 'none';
+            contentArea.style.display = 'block';
+            searchHeader.style.display = 'block';
+            bottomNav.style.display = 'flex';
+            floatingUploadBtn.style.display = 'flex';
+            
+            // Stop the video
+            videoIframe.src = '';
+            
+            // Return to the previous page
+            if (previousState.page === 'assets') {
+                loadAssetsPage();
+            } else if (previousState.page === 'profile') {
+                loadProfilePage();
+            } else {
+                loadHomepage();
+            }
+        }
+
+        // Upload map function
+        async function uploadMap(title, code, youtubeUrl, description, isAssets = false) {
+            if (!title || !code) {
+                showToast('Please fill in all required fields', 3000, isAssets);
+                return;
+            }
+            
+            if (!currentUser) {
+                showToast('Please login to upload maps', 3000, isAssets);
+                loginModal.style.display = 'flex';
+                return;
+            }
+            
+            const loader = isAssets ? assetsSubmitLoader : submitLoader;
+            const btn = isAssets ? assetsSubmitBtn : submitBtn;
+            
+            loader.style.display = 'block';
+            btn.disabled = true;
+            
+            try {
+                let thumbnailUrl = DEFAULT_THUMBNAIL;
+                const thumbnail = isAssets ? assetsThumbnailFile : thumbnailFile;
+                
+                if (thumbnail) {
+                    thumbnailUrl = await uploadImageToImgBB(thumbnail);
+                }
+                
+                // Get all map codes from the inputs
+                const container = isAssets ? assetsCodeInputsContainer : codeInputsContainer;
+                const codeInputs = container.querySelectorAll('.map-code-input');
+                const labels = container.querySelectorAll('.input-label');
+                
+                let codes = [];
+                codeInputs.forEach((input, index) => {
+                    if (input.value.trim()) {
+                        codes.push({
+                            label: labels[index].value || 'Map Code',
+                            code: input.value.trim()
+                        });
+                    }
+                });
+                
+                if (codes.length === 0) {
+                    throw new Error('Please enter at least one map code');
+                }
+                
+                const mapData = {
+                    title: title,
+                    codes: codes,
+                    youtubeUrl: youtubeUrl || '',
+                    description: description || '',
+                    uploaderId: currentUser.uid,
+                    uploaderName: currentUser.username || 'Anonymous',
+                    createdAt: firebase.database.ServerValue.TIMESTAMP,
+                    formattedDate: formatDate(Date.now()),
+                    thumbnail: thumbnailUrl,
+                    views: 0,
+                    tags: ['Free Fire', 'Map', 'Craftland']
+                };
+                
+                // First try primary database
+                try {
+                    const dbRef = isAssets ? secondaryDatabase : primaryDatabase;
+                    const newMapRef = dbRef.ref('maps').push();
+                    await newMapRef.set(mapData);
+                    
+                    loader.style.display = 'none';
+                    btn.disabled = false;
+                    
+                    if (isAssets) {
+                        assetsUploadFormModal.style.display = 'none';
+                        document.getElementById('assets-map-title').value = '';
+                        document.getElementById('assets-youtube-url').value = '';
+                        document.getElementById('assets-description').value = '';
+                        assetsThumbnailPreview.style.display = 'none';
+                        assetsThumbnailFile = null;
+                        
+                        // Clear code inputs but keep one
+                        assetsCodeInputsContainer.innerHTML = '';
+                        addCodeInput(assetsCodeInputsContainer);
+                    } else {
+                        uploadFormModal.style.display = 'none';
+                        document.getElementById('map-title').value = '';
+                        document.getElementById('youtube-url').value = '';
+                        document.getElementById('description').value = '';
+                        thumbnailPreview.style.display = 'none';
+                        thumbnailFile = null;
+                        
+                        // Clear code inputs but keep one
+                        codeInputsContainer.innerHTML = '';
+                        addCodeInput(codeInputsContainer);
+                    }
+                    
+                    showToast('Map uploaded successfully!', 3000, isAssets);
+                    
+                    if (isAssets) {
+                        loadAssetsPage();
+                    } else {
+                        loadHomepage();
+                    }
+                } catch (primaryError) {
+                    // If primary fails, try backup database
+                    if (!isAssets) { // Only for home maps (assets have their own database)
+                        try {
+                            const backupRef = backupDatabase.ref('maps').push();
+                            await backupRef.set(mapData);
+                            
+                            loader.style.display = 'none';
+                            btn.disabled = false;
+                            
+                            uploadFormModal.style.display = 'none';
+                            document.getElementById('map-title').value = '';
+                            document.getElementById('youtube-url').value = '';
+                            document.getElementById('description').value = '';
+                            thumbnailPreview.style.display = 'none';
+                            thumbnailFile = null;
+                            
+                            // Clear code inputs but keep one
+                            codeInputsContainer.innerHTML = '';
+                            addCodeInput(codeInputsContainer);
+                            
+                            showToast('Map uploaded to backup database successfully!');
+                            loadHomepage();
+                        } catch (backupError) {
+                            loader.style.display = 'none';
+                            btn.disabled = false;
+                            showToast('Error uploading map to both databases: ' + backupError.message);
+                        }
+                    } else {
+                        loader.style.display = 'none';
+                        btn.disabled = false;
+                        showToast('Error uploading map: ' + primaryError.message, 3000, true);
+                    }
+                }
+            } catch (error) {
+                loader.style.display = 'none';
+                btn.disabled = false;
+                showToast('Error uploading map: ' + error.message, 3000, isAssets);
+            }
+        }
+
+        // Handle back button/popstate events
+        window.addEventListener('popstate', function(event) {
+            // Check if we're coming from a map detail view
+            if (mapDetailModal.style.display === 'block') {
+                mapDetailModal.style.display = 'none';
+                
+                // Only reload if we came from a direct map link
+                if (isDirectMapLink) {
+                    isDirectMapLink = false;
+                    
+                    // Restore previous state
+                    if (previousState.page === 'assets') {
+                        loadAssetsPage();
+                    } else if (previousState.page === 'home') {
+                        loadHomepage();
+                    }
+                    
+                    if (previousState.searchTerm) {
+                        document.getElementById('search-input').value = previousState.searchTerm;
+                        filterMaps(previousState.searchTerm);
+                    }
+                    
+                    window.scrollTo(0, previousState.scrollPosition);
+                }
+            }
+            // Check if we're coming from a direct profile link
+            else if (isDirectProfileLink) {
+                isDirectProfileLink = false;
+                
+                // Restore previous state
+                if (previousState.page === 'assets') {
+                    loadAssetsPage();
+                } else if (previousState.page === 'home') {
+                    loadHomepage();
+                }
+                
+                if (previousState.searchTerm) {
+                    document.getElementById('search-input').value = previousState.searchTerm;
+                    filterMaps(previousState.searchTerm);
+                }
+                
+                window.scrollTo(0, previousState.scrollPosition);
+            }
+            // Check if we're coming from video page
+            else if (videoSection.style.display === 'flex') {
+                closeVideoPage();
+            }
+        });
+
+        // Filter maps based on search term
+        function filterMaps(searchTerm) {
+            const mapCards = document.querySelectorAll('.map-card');
+            if (searchTerm === '') {
+                // Show all maps if search term is empty
+                mapCards.forEach(card => {
+                    card.style.display = 'block';
+                });
+                return;
+            }
+            
+            mapCards.forEach(card => {
+                const title = card.querySelector('.map-title').textContent.toLowerCase();
+                const code = card.querySelector('.map-code').textContent.toLowerCase();
+                if (title.includes(searchTerm.toLowerCase()) || code.includes(searchTerm.toLowerCase())) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listeners when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load Firebase configurations first
+            loadFirebaseConfigs();
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', () => {
+                togglePasswordVisibility(passwordInput, togglePassword);
+            });
+            
+            toggleRegPassword.addEventListener('click', () => {
+                togglePasswordVisibility(regPasswordInput, toggleRegPassword);
+            });
+            
+            // Password strength meter
+            regPasswordInput.addEventListener('input', updatePasswordStrength);
+            
+            // Login button click
+            loginBtn.addEventListener('click', () => {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (!username || !password) {
+                    loginError.textContent = 'Please enter both username and password';
+                    return;
+                }
+                
+                login(username, password);
+            });
+            
+            // Register button click
+            registerBtn.addEventListener('click', () => {
+                const username = document.getElementById('reg-username').value;
+                const password = document.getElementById('reg-password').value;
+                
+                if (username.length < 3) {
+                    registerError.textContent = 'Username must be at least 3 characters';
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    registerError.textContent = 'Password must be at least 6 characters';
+                    return;
+                }
+                
+                register(username, password);
+            });
+            
+            // Check username availability on input
+            regUsernameInput.addEventListener('input', (e) => {
+                checkUsernameAvailability(e.target.value);
+            });
+            
+            // Switch between login and register tabs
+            loginTab.addEventListener('click', () => {
+                loginTab.classList.add('active');
+                registerTab.classList.remove('active');
+                loginContent.classList.add('active');
+                registerContent.classList.remove('active');
+            });
+            
+            registerTab.addEventListener('click', () => {
+                registerTab.classList.add('active');
+                loginTab.classList.remove('active');
+                registerContent.classList.add('active');
+                loginContent.classList.remove('active');
+            });
+            
+            // Floating upload button click
+            floatingUploadBtn.addEventListener('click', () => {
+                if (!currentUser) {
+                    loginModal.style.display = 'flex';
+                    return;
+                }
+                
+                if (currentAppPage === 'assets') {
+                    assetsUploadFormModal.style.display = 'flex';
+                } else {
+                    uploadFormModal.style.display = 'flex';
+                }
+            });
+            
+            // Close modal buttons
+            closeModal.addEventListener('click', () => {
+                uploadFormModal.style.display = 'none';
+            });
+            
+            closeAssetsModal.addEventListener('click', () => {
+                assetsUploadFormModal.style.display = 'none';
+            });
+            
+            closeLoginModal.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+            });
+
+            closeShare.addEventListener('click', () => {
+                shareModal.style.display = 'none';
+            });
+            
+            // Close detail modal
+            closeDetail.addEventListener('click', () => {
+                mapDetailModal.style.display = 'none';
+                
+                // Only update URL if we came from a direct map link
+                if (isDirectMapLink) {
+                    isDirectMapLink = false;
+                    window.history.pushState({ path: BASE_URL }, '', BASE_URL);
+                    
+                    // Restore previous state
+                    if (previousState.page === 'assets') {
+                        loadAssetsPage();
+                    } else if (previousState.page === 'home') {
+                        loadHomepage();
+                    }
+                    
+                    if (previousState.searchTerm) {
+                        document.getElementById('search-input').value = previousState.searchTerm;
+                        filterMaps(previousState.searchTerm);
+                    }
+                    
+                    window.scrollTo(0, previousState.scrollPosition);
+                } else {
+                    // Just close the modal without changing anything else
+                    window.history.back();
+                }
+            });
+            
+            // Submit buttons for upload forms
+            submitBtn.addEventListener('click', () => {
+                const title = document.getElementById('map-title').value;
+                const youtubeUrl = document.getElementById('youtube-url').value;
+                const description = document.getElementById('description').value;
+                
+                // Get the first code as the primary code (for backward compatibility)
+                const firstCodeInput = codeInputsContainer.querySelector('.map-code-input');
+                const code = firstCodeInput ? firstCodeInput.value : '';
+                
+                uploadMap(title, code, youtubeUrl, description, false);
+            });
+            
+            assetsSubmitBtn.addEventListener('click', () => {
+                const title = document.getElementById('assets-map-title').value;
+                const youtubeUrl = document.getElementById('assets-youtube-url').value;
+                const description = document.getElementById('assets-description').value;
+                
+                // Get the first code as the primary code (for backward compatibility)
+                const firstCodeInput = assetsCodeInputsContainer.querySelector('.map-code-input');
+                const code = firstCodeInput ? firstCodeInput.value : '';
+                
+                uploadMap(title, code, youtubeUrl, description, true);
+            });
+            
+            // Thumbnail upload handlers
+            thumbnailUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    thumbnailFile = file;
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        thumbnailPreview.src = e.target.result;
+                        thumbnailPreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    thumbnailPreview.src = '#';
+                    thumbnailPreview.style.display = 'none';
+                    thumbnailFile = null;
+                }
+            });
+            
+            assetsThumbnailUpload.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    assetsThumbnailFile = file;
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        assetsThumbnailPreview.src = e.target.result;
+                        assetsThumbnailPreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    assetsThumbnailPreview.src = '#';
+                    assetsThumbnailPreview.style.display = 'none';
+                    assetsThumbnailFile = null;
+                }
+            });
+            
+            // Navigation buttons
+            homeBtn.addEventListener('click', loadHomepage);
+            assetsBtn.addEventListener('click', loadAssetsPage);
+            profileBtn.addEventListener('click', loadProfilePage);
+            videoBtn.addEventListener('click', () => {
+                previousState = {
+                    scrollPosition: window.scrollY,
+                    searchTerm: document.getElementById('search-input').value,
+                    page: currentAppPage
+                };
+                loadVideoPage();
+            });
+            
+            // Close video button
+            closeVideoBtn.addEventListener('click', closeVideoPage);
+            
+            // Pagination buttons
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    goToPage(currentPage - 1);
+                }
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    goToPage(currentPage + 1);
+                }
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === uploadFormModal) {
+                    uploadFormModal.style.display = 'none';
+                }
+                if (event.target === assetsUploadFormModal) {
+                    assetsUploadFormModal.style.display = 'none';
+                }
+                if (event.target === mapDetailModal) {
+                    mapDetailModal.style.display = 'none';
+                    
+                    // Only update URL if we came from a direct map link
+                    if (isDirectMapLink) {
+                        isDirectMapLink = false;
+                        window.history.pushState({ path: BASE_URL }, '', BASE_URL);
+                        
+                        // Restore previous state
+                        if (previousState.page === 'assets') {
+                            loadAssetsPage();
+                        } else if (previousState.page === 'home') {
+                            loadHomepage();
+                        }
+                        
+                        if (previousState.searchTerm) {
+                            document.getElementById('search-input').value = previousState.searchTerm;
+                            filterMaps(previousState.searchTerm);
+                        }
+                        
+                        window.scrollTo(0, previousState.scrollPosition);
+                    } else {
+                        // Just close the modal without changing anything else
+                        window.history.back();
+                    }
+                }
+                if (event.target === confirmDeleteModal) {
+                    confirmDeleteModal.style.display = 'none';
+                }
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (event.target === shareModal) {
+                    shareModal.style.display = 'none';
+                }
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                filterMaps(searchTerm);
+            });
+            
+            // Chip search functionality
+            chips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    // Remove active class from all chips
+                    chips.forEach(c => c.classList.remove('active'));
+                    // Add active class to clicked chip
+                    chip.classList.add('active');
+                    
+                    const searchValue = chip.dataset.value;
+                    searchInput.value = searchValue;
+                    filterMaps(searchValue);
+                });
+            });
+            
+            // Search toggle buttons
+            searchOpen.addEventListener('click', toggleSearch);
+            searchClose.addEventListener('click', toggleSearch);
+            
+            // Delete confirmation buttons
+            confirmDeleteYes.addEventListener('click', deleteMap);
+            confirmDeleteNo.addEventListener('click', () => {
+                confirmDeleteModal.style.display = 'none';
+                mapToDelete = null;
+            });
+            
+            // Add code inputs
+            addCodeBtn.addEventListener('click', () => {
+                addCodeInput(codeInputsContainer);
+            });
+            
+            assetsAddCodeBtn.addEventListener('click', () => {
+                addCodeInput(assetsCodeInputsContainer);
+            });
+        });
+
+        function isWebView() {
+            const ua = navigator.userAgent || '';
+            // WebView detect logic (Android WebView + iOS UIWebView/WKWebView)
+            return (
+                (ua.includes('wv') || ua.includes('WebView')) || // Android WebView
+                (ua.includes('iPhone') && !ua.includes('Safari')) // iOS WebView
+            );
+        }
+
+        if (!isWebView()) {
+            // Browser detected: show button
+            document.getElementById('buttonon').style.display = 'inline-flex';
+        }
+    </script>
+</body>
+</html>
